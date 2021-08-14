@@ -6,18 +6,11 @@
 
   let fileinput;
   const onFileSelected = (e) => {
-    let font = e.target.files[0];
+    let font = e.target.files[0].name;
+
+    console.log(`Adding ${font}`);
 
     $fonts = [...$fonts, font];
-
-    //let reader = new FileReader();
-    //reader.readAsArrayBuffer(font);
-    //reader.onload = (e) => {
-    //  file = opentype.parse(e.target.result, {});
-    //  const ctx = canvas.getContext("2d");
-
-    //  file.draw(ctx, "JEFFREY", 0, 400, 500, { kerning: true, hinting: false });
-    //};
   };
 
   onMount(() => {});
@@ -34,14 +27,9 @@
 
   <label for="actual-btn">Choose File</label>
 
-  <!--
-  <div>
-    <canvas bind:this={canvas} width={1000} height={500} />
-  </div>
--->
-  <p>fonts</p>
-  {JSON.stringify($fonts)}
-  <p>end</p>
+  {#each [...$fonts] as font}
+    <p>{font}</p>
+  {/each}
 </div>
 
 <style>
