@@ -1,26 +1,29 @@
 <script>
-  import { fonts } from "../stores.js";
+  export let font;
 
-  let style,
-    fontblocks = "";
+  import { onMount, onDestroy } from "svelte";
+  import * as utils from "../utils.js";
 
-  $: {
-    $fonts.forEach((font) => {
-      fontblocks =
-        fontblocks +
-        `
-      @font-face {
-        font-family: "${font.names.fullName.en}";
-      }
-    `;
-    });
+  let fontface;
 
-    style = "<style>" + fontblocks + "</style>";
-  }
+  onMount(() => {
+    fontface = `
+    @font-face {
+      font-family: ${utils.fontName(font)};
+      src: ${utils.getFontData(font)};
+    }`;
+
+    let existingEl = document.getElementById(utils.getStyleIdFromFont(font));
+
+    if (existingEl !== null) existingEl.remove();
+
+    let newEl = document.createElement("style");
+    newEl.setAttribute("id", utils.getStyleIdFromFont(font));
+    newEl.appendChild(document.createTextNode(fontface));
+    document.head.appendChild(newEl);
+  });
 </script>
 
-<svelte:head>
-  {@html style}
-</svelte:head>
-
-<h1>{$fonts.length}</h1>
+<div>
+  <p>inject - {font.font.names.fullName.en}</p>
+</div>

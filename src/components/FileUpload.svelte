@@ -1,24 +1,31 @@
 <script>
-  import { fonts } from "../stores.js";
+  import { nanoid } from "nanoid";
   import * as opentype from "opentype.js";
 
+  import { fonts } from "../stores.js";
+  import * as utils from "../utils.js";
+  import FontInjector from "../components/FontInjector.svelte";
+
   let fileinput;
-  const onFileSelected = (e) => {
+
+  const onFileSelected = async (e) => {
     let path = e.target.files[0];
 
-    let reader = new FileReader();
-    reader.readAsArrayBuffer(path);
+    let arrayBuffer = await utils.readFontAsArrayBuffer(path);
+    let dataURL = await utils.readFontAsDataURL(path);
 
-    reader.onload = (e) => {
-      let font = opentype.parse(e.target.result);
-      console.log(`Adding ${font.names.fullName.en}`);
-
-      $fonts = [...$fonts, font];
-    };
+    $fonts = [
+      ...$fonts,
+      { font: opentype.parse(arrayBuffer), data: dataURL, uid: nanoid(4) }
+    ];
   };
 </script>
 
 <div>
+  {#each [...$fonts] as font}
+    <FontInjector {font} />
+  {/each}
+
   <input
     type="file"
     id="actual-btn"
@@ -30,7 +37,7 @@
   <label for="actual-btn">Choose File</label>
 
   {#each [...$fonts] as font}
-    <p>{font}</p>
+    <p>{font.font}</p>
   {/each}
 </div>
 

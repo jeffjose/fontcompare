@@ -25,3 +25,4 @@ const store = (key, initialValue) => {
 };
 
 export const fonts = writable(new Set());
+export const fontData = writable(new Set());
