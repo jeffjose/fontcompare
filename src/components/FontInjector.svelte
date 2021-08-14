@@ -11,6 +11,7 @@
     @font-face {
       font-family: ${utils.fontName(font)};
       src: ${utils.getFontData(font)};
+      font-display: block;
     }`;
 
     let existingEl = document.getElementById(utils.getStyleIdFromFont(font));
@@ -25,5 +26,13 @@
 </script>
 
 <div>
-  <p>inject - {font.font.names.fullName.en}</p>
+  <p class="fontname" style="font-family: {utils.fontName(font)}">
+    {utils.fontName(font)}
+  </p>
 </div>
+
+<style>
+  .fontname {
+    height: 20px;
+  }
+</style>
