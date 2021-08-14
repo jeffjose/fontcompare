@@ -1,19 +1,21 @@
 <script>
-  import * as opentype from "opentype.js";
-  import { onMount } from "svelte";
-
   import { fonts } from "../stores.js";
+  import * as opentype from "opentype.js";
 
   let fileinput;
   const onFileSelected = (e) => {
-    let font = e.target.files[0].name;
+    let path = e.target.files[0];
 
-    console.log(`Adding ${font}`);
+    let reader = new FileReader();
+    reader.readAsArrayBuffer(path);
 
-    $fonts = [...$fonts, font];
+    reader.onload = (e) => {
+      let font = opentype.parse(e.target.result);
+      console.log(`Adding ${font.names.fullName.en}`);
+
+      $fonts = [...$fonts, font];
+    };
   };
-
-  onMount(() => {});
 </script>
 
 <div>
