@@ -1,0 +1,25 @@
+---
+import FileUpload from '../components/FileUpload.svelte';
+---
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Font Compare</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/style/global.css">
+    <link rel="stylesheet" href="/style/home.css">
+    <!--
+    https://stackoverflow.com/questions/43042889/typescript-referenceerror-exports-is-not-defined
+    -->
+    <script>var exports = {};</script>
+
+
+</head>
+<body>
+    <main>
+        <FileUpload client:visible />
+    </main>
+</body>
+</html>
