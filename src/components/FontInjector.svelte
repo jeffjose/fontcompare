@@ -12,7 +12,12 @@
       font-family: ${utils.fontName(font)};
       src: ${utils.getFontData(font)};
       font-display: block;
-    }`;
+    }
+
+    .${utils.getFontClassName(font)} {
+      font-family: ${utils.fontName(font)};
+    }
+    `;
 
     let existingEl = document.getElementById(utils.getStyleIdFromFont(font));
 
@@ -24,15 +29,3 @@
     document.head.appendChild(newEl);
   });
 </script>
-
-<div>
-  <p class="fontname" style="font-family: {utils.fontName(font)}">
-    {utils.fontName(font)}
-  </p>
-</div>
-
-<style>
-  .fontname {
-    height: 20px;
-  }
-</style>

@@ -1,5 +1,6 @@
 ---
-import FileUpload from '../components/FileUpload.svelte';
+import FontUpload from '../components/FontUpload.svelte';
+import FontDisplay from '../components/FontDisplay.svelte';
 ---
 <html lang="en">
 
@@ -14,12 +15,11 @@ import FileUpload from '../components/FileUpload.svelte';
     https://stackoverflow.com/questions/43042889/typescript-referenceerror-exports-is-not-defined
     -->
     <script>var exports = {};</script>
-
-
 </head>
 <body>
     <main>
-        <FileUpload client:visible />
+        <FontUpload client:visible />
+        <FontDisplay client:visible />
     </main>
 </body>
 </html>

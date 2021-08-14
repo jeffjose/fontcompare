@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "astro dev",
-    "build": "astro build"
+    "build": "astro build",
+    "serve": "cd dist; python -m http.server"
   },
   "devDependencies": {
     "@astrojs/renderer-svelte": "^0.1.1",

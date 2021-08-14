@@ -5,7 +5,11 @@ export function fontName(font) {
 }
 
 export function getStyleIdFromFont(font) {
-  return `${consts.prefix}-${font.font.names.postScriptName.en}-${font.uid}`;
+  return `${consts.prefix}-style-${font.font.names.postScriptName.en}-${font.uid}`;
+}
+
+export function getFontClassName(font) {
+  return `${consts.prefix}-font-${font.font.names.postScriptName.en}-${font.uid}`;
 }
 
 export function getFontData(font) {
