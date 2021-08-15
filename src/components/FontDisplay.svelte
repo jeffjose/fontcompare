@@ -6,7 +6,11 @@
 
 <div class="displaygroup">
   {#each [...$fonts] as font}
-    <div class="display {utils.getFontClassName(font)}">A</div>
+    <div class="display {utils.getFontClassName(font)}">
+      <div>A</div>
+      <div>B</div>
+      <div>C</div>
+    </div>
   {/each}
 </div>
 
@@ -19,8 +23,12 @@
   }
 
   .display {
-    font-size: 150pt;
+    display: flex;
+    flex-direction: column;
     align-self: baseline;
-    background-color: white;
+  }
+  .display * {
+    font-size: 200pt;
+    align-self: baseline;
   }
 </style>
