@@ -8,16 +8,16 @@
 
   let fileinput;
 
-  const onFileSelected = async (e) => {
-    let path = e.target.files[0];
+  const onFileSelected = (e) => {
+    [...e.target.files].forEach(async (path) => {
+      let arrayBuffer = await utils.readFontAsArrayBuffer(path);
+      let dataURL = await utils.readFontAsDataURL(path);
 
-    let arrayBuffer = await utils.readFontAsArrayBuffer(path);
-    let dataURL = await utils.readFontAsDataURL(path);
-
-    $fonts = [
-      ...$fonts,
-      { font: opentype.parse(arrayBuffer), data: dataURL, uid: nanoid(4) }
-    ];
+      $fonts = [
+        ...$fonts,
+        { font: opentype.parse(arrayBuffer), data: dataURL, uid: nanoid(4) }
+      ];
+    });
   };
 </script>
 
@@ -29,6 +29,7 @@
       on:change={(e) => onFileSelected(e)}
       bind:this={fileinput}
       hidden
+      multiple
     />
 
     <label class="label" for="actual-btn">Choose File</label>
